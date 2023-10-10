@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//test@@@
 
 // 아이템 감지 및 습득 
 public class ActionController : MonoBehaviour
