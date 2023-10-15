@@ -13,24 +13,16 @@ public class GameManager : MonoBehaviour
     public Transform[] EnemyRespawnPoints_Brown; // 적이 출현할 위치를 담을 배열
     public TalkManager talkManager; // 토크매니저를 가져오기 위한 변수.
     public FadeEffect fadeEffect;
-    //public CameraShake cameraShake;
     public GameObject deathMessagePanel; // 죽었을 때 메세지를 나타내는 게임오브젝트 
-    //public Camera3 camera;
     public Transform PlayerRespawnPoint; // 플레이어가 리스폰 될 위치를 담을 배열 
     public GameObject Player; // 플레이어 게임오브젝트를 담을 변수
     public Slider hpbar;
     public Cinemachine.CinemachineBrain camera3;
-
+    Enemy_RedDragon redDragon;
     public Cinemachine.CinemachineFreeLook freeLook;
 
 
-    //// 적 캐릭터 게임오브젝트를 저장할 변수 
-    //public GameObject Enemy_PurpleDragon;
-    //public GameObject Enemy_GreyDragon;
-    //public GameObject Enemy_BrownDragon;
-    //public GameObject Enemy_RedDragon;
-
-    // 적 캐릭터의 생성할 주기 
+    // 적을 생성할 주기 -> 리스폰 기능 사용 시 
     public float enemyCreateTime = 3.0f;
 
     // 적 캐릭터의 최대 생성 개수
@@ -54,16 +46,13 @@ public class GameManager : MonoBehaviour
     private string openMapSound;
 
 
-    // 인벤토리가 활성화되면 true가 될텐데, 그때는 캐릭터 못움직이게 
-    //public static bool fullCameraActivated = false;
-
-    //외부에 있는 플레이어 게임오브젝트의 프랜스폼을 찾는다.
-
-
     // Start is called before the first frame update
 
     private void Start()
     {
+
+        redDragon = GetComponent<Enemy_RedDragon>();
+        /** 리스폰 기능을 추가 했었으나, 현재는 사용하지 않음.*/
         //EnemyRespawnPoints_Purple = GameObject.Find("SpawnPoint_PurpleDragon").GetComponentsInChildren<Transform>(); // 스폰포인트그룹의 자식의 위치값을 저장
         //EnemyRespawnPoints_Grey = GameObject.Find("SpawnPoint_GreyDragon").GetComponentsInChildren<Transform>(); // 스폰포인트그룹의 자식의 위치값을 저장
         //EnemyRespawnPoints_Brown = GameObject.Find("SpawnPoint_BrownDragon").GetComponentsInChildren<Transform>(); // 스폰포인트그룹의 자식의 위치값을 저장
@@ -157,9 +146,9 @@ public class GameManager : MonoBehaviour
         StartCoroutine(fadeEffect.Fade(1, 0));   // 서서히 화면 밝아지도록함 
 
 
-        if (Enemy_RedDragon.instance.enemyhp > 0)
+        if (redDragon.enemyhp > 0)
         {
-            Enemy_RedDragon.instance.enabled = true;
+            redDragon.enabled = true;
         }
 
 

@@ -289,28 +289,8 @@ public class Enemy_RedDragon : MonoBehaviour
     private string redEnemyWalk_Sound; // 라카이서스 걷는 소리 
 
     [SerializeField]
-    private string Boss_Bgm;
+    private string Boss_Bgm; // 전투 시작 시 배경음
 
-    public static Enemy_RedDragon instance; // 인스턴스화
-
-
-
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-
-            //DontDestroyOnLoad(gameObject);
-
-        }
-
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
-    }
 
     // 사용가능한 공격을 저장하는 리스트
     public List<Skill> skillList = new List<Skill>();

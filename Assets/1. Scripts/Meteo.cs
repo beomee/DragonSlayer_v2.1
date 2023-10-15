@@ -26,7 +26,7 @@ public class Meteo : MonoBehaviour
            
             explosion.gameObject.SetActive(true);
             mesh.enabled = false; // 운석 메쉬 보이지 않게
-            Enemy_RedDragon.instance.RedEnemySoundStart_Explosion();
+            redDragon.RedEnemySoundStart_Explosion();
             Destroy(gameObject, 3f);
 
         }
@@ -37,7 +37,7 @@ public class Meteo : MonoBehaviour
             explosion.gameObject.SetActive(true);
             mesh.enabled = false;
             collision.GetComponent<Player>().Damaged(redDragon.enemystr * meteoAttackDamage);
-            Enemy_RedDragon.instance.RedEnemySoundStart_Explosion();
+            redDragon.RedEnemySoundStart_Explosion();
 
             Destroy(gameObject, 1f) ;
         }

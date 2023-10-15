@@ -7,24 +7,12 @@ public class ShowMapTitle3 : MonoBehaviour
 {
 
     public Text mapTitle3;
+    Enemy_RedDragon redDragon;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-
-
-
+        redDragon = GetComponent<Enemy_RedDragon>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-
-
-    }
-
-
     private void OnTriggerEnter(Collider other)
     {
 
@@ -32,8 +20,8 @@ public class ShowMapTitle3 : MonoBehaviour
         if (other.CompareTag("Player"))
         {
 
-            Enemy_RedDragon.instance.enemyhp = Enemy_RedDragon.instance.wholeEnemyhp;
-            Enemy_RedDragon.instance.hpBarSlider.value = Enemy_RedDragon.instance.enemyhp;
+            redDragon.enemyhp = redDragon.wholeEnemyhp;
+            redDragon.hpBarSlider.value = redDragon.enemyhp;
             AudioManager.instance.PlayStartMountainBgm();
 
 
@@ -42,7 +30,6 @@ public class ShowMapTitle3 : MonoBehaviour
 
 
     }
-
 
 
     IEnumerator ShowMapTitle3_Coroutine()   // 텍스트의 컬러값 중 a값을 0에서 1로 올리는 함수 

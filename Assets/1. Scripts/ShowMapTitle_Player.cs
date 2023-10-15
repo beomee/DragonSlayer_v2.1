@@ -7,7 +7,6 @@ public class ShowMapTitle_Player : MonoBehaviour
 {
 
     public Text[] mapTitles;
-    //public BoxCollider boxCollider;
 
     Text ShowMapTitle; // 맵 텍스트를 담을 변수 
 
@@ -17,23 +16,12 @@ public class ShowMapTitle_Player : MonoBehaviour
     bool isArea3 = false;
     bool isArea4 = false;
 
-    // Start is called before the first frame update
-    void Start()
+    Enemy_RedDragon redDragon;
+
+    private void Start()
     {
-        //StartCoroutine(ShowArea0());
-       
+        redDragon = GetComponent<Enemy_RedDragon>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-
-
-    }
-
-
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -74,8 +62,8 @@ public class ShowMapTitle_Player : MonoBehaviour
 
             ChangeArea(ShowMapTitle);
 
-            Enemy_RedDragon.instance.enemyhp = Enemy_RedDragon.instance.wholeEnemyhp;
-            Enemy_RedDragon.instance.hpBarSlider.value = Enemy_RedDragon.instance.enemyhp;
+            redDragon.enemyhp = redDragon.wholeEnemyhp;
+            redDragon.hpBarSlider.value = redDragon.enemyhp;
             AudioManager.instance.PlayStartMountainBgm();
         }
 
