@@ -65,34 +65,27 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void OpenInventory()
+    private void OpenInventory() // 인벤토리 UI 열기
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         freeLook.m_XAxis.m_MaxSpeed = 0;
         go_InventoryBase.SetActive(true);
         AudioManager.instance.PlaySE(openUi,1,1);
-        //camera3.enabled = false;
         InvenUiOpen = true;
-
     }
-    public void CloseInventory()
+    public void CloseInventory() // 인벤토리 UI 닫기
     {
         freeLook.m_XAxis.m_MaxSpeed = 150;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-
         go_InventoryBase.SetActive(false);
         theSlotToolTip.HideToolTip();
-
         InvenUiOpen = false;
-
-
     }
 
     public void AcquireItem(Item _item, int _count = 1)  // 아이템 줍기
     {
-
         // 슬롯에 이미 아이템이 있다
         for (int i = 0; i < slots.Length; i++)
         {
@@ -101,13 +94,12 @@ public class Inventory : MonoBehaviour
                 // 개수를 채워주고
                 if (slots[i].item.itemName == _item.itemName)
                 {
-                    slots[i].SetSlotCount(_count); // 아이템의 수량을 나타내는 코드
+                    slots[i].SetSlotCount(_count); // 아이템의 수량을 나타냄
                     return;
                 }
             }
 
         }
-
         // 아이템이 없다
         for (int i = 0; i < slots.Length; i++)
         {
@@ -139,25 +131,16 @@ public class Inventory : MonoBehaviour
                     // 제이슨안에 있는 인트 자료형의 리스트에 / 슬롯안에있는 아이템의 아이템 번호를 추가
                     Json.instance.data.itemNumber.Add(slots[i].item.ItemNumber); 
                 }
-
             }
-
-
         }
-
-
     }
 
     public void LoadSlot() // 인트로 고유번호를 저장해놓은 리스트에서 확인하고, 그 번호에 맞는 아이템을 인벤토리 슬롯안으로 넣어야 함.
     {
-
         for (int i = 0; i < Json.instance.data.itemNumber.Count; i++) // 카운트만큼 반복해서 리스트안의 번호를 가져온거.
         {
-            
             int itemRealNumber = Json.instance.data.itemNumber[i]; // 아이템 고유번호를 담는 변수.
-
-            AcquireItem(itemKinds[itemRealNumber]);  // 아이템 획득하는 함수(아이템이 뭔지 -> 아이템종류의 고유번호대로 가져오게끔 ex) 0이면 골드, 1이면 포션 ...)
-            
+            AcquireItem(itemKinds[itemRealNumber]);  // 아이템 획득하는 함수(아이템이 뭔지 -> 아이템종류의 고유번호대로 가져오게끔 ex) 0이면 골드, 1이면 포션 ...) 
         }
     }
 }

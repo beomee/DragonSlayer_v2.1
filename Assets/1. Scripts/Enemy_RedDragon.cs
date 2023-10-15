@@ -4,23 +4,37 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
 
+public abstract class Skill // Skill 추상 클래스
+{
+    public float coolTime { get; set; } // 현재 스킬 쿨타임 값
+    public float originCoolTime { get; set; }  // 전체 스킬 쿨타임 값
+    public Animator anim;
+    public int priority { get; } // 스킬 우선순위 값
 
+    public Skill(float coolTime, int priority, Animator anim)
+    {
+        this.coolTime = coolTime;
+        this.priority = priority;
+        this.anim = anim;
 
+        originCoolTime = coolTime;
+    }
+    public abstract void Attack();  // 상속된 Attack 함수 실행
+}
 class BiteSkill : Skill
 {
-
-    // 몬스터 스킬 생성자 메소드
-    public BiteSkill(float coolTime, int priority, Animator anim) : base(coolTime, priority, anim) 
-    {
-       
+    // 몬스터 공격 생성자 메서드
+    public BiteSkill(float coolTime, int priority, Animator anim) : base(coolTime, priority, anim)
+    { 
+    
     }
-
-    public override void Attack() // 실제
+    public override void Attack() // 공격 실행
     {
         // 공격 애니메이션
         anim.SetTrigger("attack");
     }
 }
+
 
 
 class JumpAttackSkill : Skill
@@ -158,28 +172,7 @@ class MeteoAttackSkill : Skill
 
 }
 
-public abstract class Skill // Skill 추상 클래스
-{
-    //protected string name; // 스킬 이름
-    public float coolTime { get; set; } // 스킬 쿨타임 값
-    public float originCoolTime { get; set; }
-    public Animator anim;
-    public int priority { get; } // 스킬 우선순위 값
 
-    public Skill(float coolTime, int priority, Animator anim/*, string name,*/)
-    {
-        // this는 'Skill 클래스의' 를 의미하고, Skill class의 멤버변수 name안에 string name을 넣어주는 것.
-        //this.name = name;
-        this.coolTime = coolTime;
-        this.priority = priority;
-        this.anim = anim;
-
-        originCoolTime = coolTime;
-    }
-
-
-    public abstract void Attack();  // 상속된 Attack()을 실행시키는 코드
-}
 
 
 
@@ -300,6 +293,9 @@ public class Enemy_RedDragon : MonoBehaviour
 
     public static Enemy_RedDragon instance; // 인스턴스화
 
+
+
+
     private void Awake()
     {
         if (instance == null)
@@ -316,11 +312,15 @@ public class Enemy_RedDragon : MonoBehaviour
         }
     }
 
+    // 사용가능한 공격을 저장하는 리스트
+    public List<Skill> skillList = new List<Skill>();
+
+    // 사용된 공격을 저장하는 리스트
+    public List<Skill> usedskillList = new List<Skill>();
 
     // Start is called before the first frame update
     void Start()
     {
-
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody>();
@@ -330,11 +330,9 @@ public class Enemy_RedDragon : MonoBehaviour
         JumpAttackSkill jumpAttackSkill = new JumpAttackSkill(8f, 4, anim);
         ShoutingAttackSkill shoutingAttackSkill = new ShoutingAttackSkill(12f, 3, anim);
 
-
-        skillList.Add(biteSkill as Skill); // Skill에 상속되어있는 biteSkill를 skillList에 저장! => (Skill)biteSkill의 모양으로도 쓸 수 있음.  
+        skillList.Add(biteSkill as Skill); // 생성한 공격(biteSkill)을 skillList에 저장
         skillList.Add(jumpAttackSkill as Skill);
         skillList.Add(shoutingAttackSkill as Skill);
-
     }
 
     bool pazeTwoStart = false;
@@ -844,14 +842,8 @@ public class Enemy_RedDragon : MonoBehaviour
     }
 
 
-    // 스킬 클래스 자료형의 skillList List를 전역변수로 새롭게 생성.
-    public List<Skill> skillList = new List<Skill>();
-
-    // 사용된 스킬을 저장하는 리스트
-    public List<Skill> usedskillList = new List<Skill>();
 
     // 공격시작을 구분짓기 위한 변수 (true == 시작함 / false == 공격중이 아님)
-
     public void isAttackFalse()  // Animation의 Add event로 호출 
     {
         isAttack = false;  // 공격이 끝난 상태 : 새로운 패턴을 사용 할 수 있는 상태 -> 패턴이 겹치게 사용되는 것을 막기 위함
@@ -882,25 +874,22 @@ public class Enemy_RedDragon : MonoBehaviour
     public IEnumerator CoroutineSkillStart() // 우선순위 높은 스킬 선정 + 사용 + 변수저장 + List2에 추가 + List2에 추가한 스킬 삭제 
     {
   
-
         if (skillList.Count > 0)  // 공격할 수 있는 스킬의 개수가 1개 이상인 경우에만
         {
-
             int pos = 0; // 우선순위를 담을 변수 초기화
 
             int maxNumber = int.MaxValue; // 가장 작은 숫자의 번호를 출력
 
             for (int i = 0; i < skillList.Count; i++) // 스킬리스트에 저장된 숫자만큼 반복
             {
-
-                if (skillList[i].priority < maxNumber)  // priority가 가장 작다면 사용 
+                if (skillList[i].priority < maxNumber)  
                 {
-                    maxNumber = skillList[i].priority;
+                    maxNumber = skillList[i].priority; 
                     pos = i;
                 }
             }
 
-            yield return new WaitForSeconds(1f);  // 공격패턴간의 시간 텀
+            yield return new WaitForSeconds(1.0f);  // 공격패턴간의 시간 텀
 
             Skill usedSkill = skillList[pos];// 우선순위가 가장 높은 스킬을 지역변수로 저장
     
@@ -912,200 +901,192 @@ public class Enemy_RedDragon : MonoBehaviour
            
             startCool = true; // 쿨타임이 돌아간다는 것을 체크하기 위함 (true : 스킬이 시작해서 쿨타임이 돌아가고있는 상태 / false : 쿨타임이 0초가 되어서 안 돌아가고 있는 상태)
 
-            StartCoroutine(coolManager(usedSkill));  // 쿨타임을 돌리고 ,체크하는 코루틴 메서드 호출                                                                               
+            StartCoroutine(CoolManager(usedSkill));  // 쿨타임을 돌리고 ,체크하는 코루틴 메서드 호출                                                                               
         }
-
-        #region
-        // List로 스킬 관리 하기 전 확률에 따른 공격패턴 코드 
-
-        //else
-        //{
-        //    StartCoroutine(AttackStart());
-        //}
-
-
-
-
-
-
-        //isAttack = false;
-
-        //Vector3 backJumpDir = -player.forward;
-        //yield return new WaitForSeconds(0.1f); // 이 시간이 길어질 수록 난이도가 쉬워짐 -> 난이도 조절에 용이함
-
-
-
-
-
-        //if (distance > 12f)
-        //{
-        //    print("ifOK");
-        //    print(agent.enabled);
-        //    agent.enabled = false;
-
-        //    //// 네비게이션이 비활성화 됐을때 -y축으로 추락하지 않도록 하는 코드   -> 이거는 툴의 설정을 바꾸는거라 굉장히 위험함.
-        //    //RigidbodyConstraints originConstraints = rigid.constraints;
-        //    //rigid.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
-
-
-        //    //distance 값 확인해보기.
-        //    print(distance);
-
-        //    if (distance < 9)
-        //    {
-
-        //        while (distance > 20f)
-        //        {
-
-        //            print("While");
-
-        //            yield return null;
-
-
-        //        }
-        //    }
-
-        //    //agent.enabled = true;
-        //    print(agent.enabled);
-
-        //    // 네비게이션이 비활성화 됐을때 -y축으로 추락하지 않도록 하는 코드 마무리 -> 이거는 툴의 설정을 바꾸는거라 굉장히 위험함.
-        //    //rigid.constraints = originConstraints;
-
-
-        //    StartCoroutine(Think());
-        //}
-
-
-
-
-
-        //if (enemyhp >= 10000f && enemyhp < 15000f) // 1페이즈
-
-        //{
-
-        //    int randomAction1 = UnityEngine.Random.Range(4, 5);
-
-
-        //    switch (randomAction1) // && 지금 몬스터가공격중이 아닐때)
-        //    {
-        //        // 깨물기 공격 (40프로)
-        //        case 0:
-        //        case 1:
-        //            StartCoroutine(Attack_Basic());
-        //            break;
-        //        // 뭉개기 공격 (40프로)
-        //        case 2:
-        //        case 3:
-        //            StartCoroutine(Attack_Jump());
-        //            break;
-        //        // 뒤로 점프 (20프로)
-        //        case 4:
-        //            StartCoroutine(Move_BackJump());
-
-        //            break;
-
-        //    }
-
-        //}
-
-        //if (enemyhp >= 5000f && enemyhp < 10000f) // 1페이즈
-        //{
-        //    int randomAction2 = UnityEngine.Random.Range(0, 6);
-        //    switch (randomAction2)
-        //    {
-        //        // 깨물기 공격 (16프로)
-        //        case 0:
-        //            StartCoroutine(Attack_Basic());
-        //            break;
-
-        //        // 샤우팅 공격 (33프로)
-        //        case 1:
-        //        case 2:
-        //            StartCoroutine(Attack_Shouting());
-
-        //            break;
-        //        // 뭉개기 공격 (33프로)
-        //        case 3:
-        //        case 4:
-        //            StartCoroutine(Attack_Jump());
-        //            break;
-
-        //        // 뒤로 점프 (16프로)
-        //        case 5:
-        //            StartCoroutine(Move_BackJump());
-        //            break;
-
-        //    }
-
-        //}
-
-        //if (enemyhp < 5000f)
-        //{
-
-        //    int randomAction3 = UnityEngine.Random.Range(0, 10);
-        //    switch (randomAction3)
-        //    {
-        //        // 뭉개기 공격 (10프로)
-        //        case 0:
-
-        //            StartCoroutine(Attack_Jump());
-        //            break;
-        //        // 샤우팅 공격 (20프로)
-        //        case 1:
-        //        case 6:
-        //            StartCoroutine(Attack_Shouting());
-        //            break;
-
-        //        // 브레스 공격 (30프로)
-        //        case 2:
-        //        case 3:
-        //        case 7:
-        //            StartCoroutine(Attack_Breath());
-        //            break;
-        //        // 메테오 공격 (40프로)
-        //        case 4:
-        //        case 5:
-        //        case 8:
-        //        case 9:
-        //            StartCoroutine(Attack_Meteo());
-        //            break;
-
-
-        //    }
-
-
-        //}
-
-        #endregion
-
     }
 
-    IEnumerator coolManager(Skill skill) // 사용된 스킬의 쿨타임을 가져와서 0으로 줄여주고, 0이 된 스킬을 변수로 선언 해주는 코루틴함수
+    #region
+    // List로 스킬 관리 하기 전 확률에 따른 공격패턴 코드 
+
+    //else
+    //{
+    //    StartCoroutine(AttackStart());
+    //}
+
+
+
+
+
+
+    //isAttack = false;
+
+    //Vector3 backJumpDir = -player.forward;
+    //yield return new WaitForSeconds(0.1f); // 이 시간이 길어질 수록 난이도가 쉬워짐 -> 난이도 조절에 용이함
+
+
+
+
+
+    //if (distance > 12f)
+    //{
+    //    print("ifOK");
+    //    print(agent.enabled);
+    //    agent.enabled = false;
+
+    //    //// 네비게이션이 비활성화 됐을때 -y축으로 추락하지 않도록 하는 코드   -> 이거는 툴의 설정을 바꾸는거라 굉장히 위험함.
+    //    //RigidbodyConstraints originConstraints = rigid.constraints;
+    //    //rigid.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
+
+
+    //    //distance 값 확인해보기.
+    //    print(distance);
+
+    //    if (distance < 9)
+    //    {
+
+    //        while (distance > 20f)
+    //        {
+
+    //            print("While");
+
+    //            yield return null;
+
+
+    //        }
+    //    }
+
+    //    //agent.enabled = true;
+    //    print(agent.enabled);
+
+    //    // 네비게이션이 비활성화 됐을때 -y축으로 추락하지 않도록 하는 코드 마무리 -> 이거는 툴의 설정을 바꾸는거라 굉장히 위험함.
+    //    //rigid.constraints = originConstraints;
+
+
+    //    StartCoroutine(Think());
+    //}
+
+
+
+
+
+    //if (enemyhp >= 10000f && enemyhp < 15000f) // 1페이즈
+
+    //{
+
+    //    int randomAction1 = UnityEngine.Random.Range(4, 5);
+
+
+    //    switch (randomAction1) // && 지금 몬스터가공격중이 아닐때)
+    //    {
+    //        // 깨물기 공격 (40프로)
+    //        case 0:
+    //        case 1:
+    //            StartCoroutine(Attack_Basic());
+    //            break;
+    //        // 뭉개기 공격 (40프로)
+    //        case 2:
+    //        case 3:
+    //            StartCoroutine(Attack_Jump());
+    //            break;
+    //        // 뒤로 점프 (20프로)
+    //        case 4:
+    //            StartCoroutine(Move_BackJump());
+
+    //            break;
+
+    //    }
+
+    //}
+
+    //if (enemyhp >= 5000f && enemyhp < 10000f) // 1페이즈
+    //{
+    //    int randomAction2 = UnityEngine.Random.Range(0, 6);
+    //    switch (randomAction2)
+    //    {
+    //        // 깨물기 공격 (16프로)
+    //        case 0:
+    //            StartCoroutine(Attack_Basic());
+    //            break;
+
+    //        // 샤우팅 공격 (33프로)
+    //        case 1:
+    //        case 2:
+    //            StartCoroutine(Attack_Shouting());
+
+    //            break;
+    //        // 뭉개기 공격 (33프로)
+    //        case 3:
+    //        case 4:
+    //            StartCoroutine(Attack_Jump());
+    //            break;
+
+    //        // 뒤로 점프 (16프로)
+    //        case 5:
+    //            StartCoroutine(Move_BackJump());
+    //            break;
+
+    //    }
+
+    //}
+
+    //if (enemyhp < 5000f)
+    //{
+
+    //    int randomAction3 = UnityEngine.Random.Range(0, 10);
+    //    switch (randomAction3)
+    //    {
+    //        // 뭉개기 공격 (10프로)
+    //        case 0:
+
+    //            StartCoroutine(Attack_Jump());
+    //            break;
+    //        // 샤우팅 공격 (20프로)
+    //        case 1:
+    //        case 6:
+    //            StartCoroutine(Attack_Shouting());
+    //            break;
+
+    //        // 브레스 공격 (30프로)
+    //        case 2:
+    //        case 3:
+    //        case 7:
+    //            StartCoroutine(Attack_Breath());
+    //            break;
+    //        // 메테오 공격 (40프로)
+    //        case 4:
+    //        case 5:
+    //        case 8:
+    //        case 9:
+    //            StartCoroutine(Attack_Meteo());
+    //            break;
+
+
+    //    }
+
+
+    //}
+
+    #endregion
+    IEnumerator CoolManager(Skill skill) // 사용된 스킬의 쿨타임을 가져와서 0으로 줄여주고, 0이 된 스킬을 변수로 선언 해주는 코루틴함수
     {
-
-        float skillAddCoolTime = 0.1f;
-
-            // 스킬을 사용했다면, 그 스킬의 현재 쿨타임이 0이 될때까지 계속 - 해주기 
+        float skillAddCoolTime = 0.0f;
+        
             while (skill.coolTime >= skillAddCoolTime)
             {
-                skill.coolTime -= Time.deltaTime;  // 프로퍼티에서 set까지 써줘야 직접 값을 변경 할 수 있음.
-                                                   //print(usedSkill.coolTime);
-                                                   //Mathf.Min(usedSkill.coolTime = 0.0f); // 0.0f 값 밑으로는 떨어지지 않게끔 제한
+                skill.coolTime -= Time.deltaTime;  
+
                 yield return null;
             }
-
             RefillSkill(skill, skill.originCoolTime);  // 쿨타임이 0이 됐을 경우, 리필해주는 함수 호출
-
     }
-
 
     void RefillSkill(Skill refillSkill, float originCoolTimeValue) // 쿨타임이 0이 된 변수를 List1에 추가 + 추가한 값을 list2에서 삭제 해주는 함수
     {
-        refillSkill.coolTime = originCoolTimeValue;  // 리필 하려는 스킬의 쿨타임에 원래 쿨타임 값을 넣어주기 
+        refillSkill.coolTime = originCoolTimeValue;  // 리필 하려는 스킬의 쿨타임을 초기화
 
-        skillList.Add(refillSkill);  // 리필 하려는 스킬을 skillList로 넣어주기
+        skillList.Add(refillSkill);  // 리필 하려는 스킬을 skillList에 추가
 
-        usedskillList.Remove(refillSkill); // 사용한 스킬을 담은 usedskillList안의 리필 한 스킬을 삭제해주기.
+        usedskillList.Remove(refillSkill); // 사용한 스킬을 담은 usedskillList안의 리필 한 스킬을 삭제
     }
 
 

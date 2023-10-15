@@ -5,11 +5,9 @@ using UnityEngine.UI;
 
 public class DragSlot : MonoBehaviour
 {
+    public static DragSlot instance; // Slot 클래스 내 드래그관련 함수를 쉽게 쓰기위해 싱글톤 사용
 
-    // 어디서든 대입시킬 수 있게 인스턴스로
-    static public DragSlot instance;
-
-    public Slot dragSlot;
+    public Slot dragSlot; // Slot안에 값을 드로그중에 복사하기 위한 변수  
 
     [SerializeField]
     private Image imageItem;

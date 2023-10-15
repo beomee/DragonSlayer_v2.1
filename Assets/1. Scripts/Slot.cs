@@ -37,13 +37,6 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     private string UseCriticalStone; // 플레이어가 전사의돌을 사용하는 소리
 
 
-
-
-
-
-
-
-
     void Start()
     {
         player = FindObjectOfType<Player>();
@@ -54,18 +47,16 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
   
 
     // 이미지의 투명도 조절
-    private void SetColor(float _alpha)
+    private void SetColor(float alpha)
     {
         Color color = itemImage.color;
-        color.a = _alpha;
+        color.a = alpha;
         itemImage.color = color;
     }
 
     // 아이템 슬롯을 추가 한다.
     public void AddItem(Item _item, int _count = 1)
     {
-
-
         item = _item;
         itemCount = _count;
         itemImage.sprite = item.itemImage;
@@ -74,31 +65,25 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         {
             go_CountImage.SetActive(true);
             text_Count.text = itemCount.ToString();
-
         }
 
         else
         {
             text_Count.text = "0";
             go_CountImage.SetActive(false);
-
         }
-
         SetColor(1);
-
     }
 
     // 슬롯 안의 아이템 개수를 나타내는 코드
     public void SetSlotCount(int _count)
     {
-     
         itemCount += _count; // 개수(itemCount)를 매개변수 _count만큼 올려주고 
         text_Count.text = itemCount.ToString(); // 그 개수(itemCount)의 값을 텍스트로 변환시켜줌
 
         // 아이템 개수가 0개 이하라면 
         if (itemCount <= 0)
         {
-            // 슬롯 클리어 
             ClearSlot(); // 슬롯에 아무것도 없는 것으로 표기
         }
     }
@@ -110,11 +95,8 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         itemCount = 0;
         itemImage.sprite = null;
         SetColor(0);
-
         text_Count.text = "0";
         go_CountImage.SetActive(false);
-
-
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -125,67 +107,46 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
                 // 아이템이 있다면 
              if (item != null)
              {
-
                 if (item.itemName == "체력회복물약")
                 {
                     player.Healing();
-
                     AudioManager.instance.PlaySE(DrinkHealingPotion,1,1);
-                    SetSlotCount(-1); // 한개를 소모
-
+                    SetSlotCount(-1); // 한개 소모
                 }
 
                 else if (item.itemName == "전사의 물약")
                 {
-
                     Json.instance.data.str += 20;
-
-                    SetSlotCount(-1); // 한개를 소모
+                    SetSlotCount(-1); 
                     AudioManager.instance.PlaySE(DrinkWarriorPotion,1,1);
                     viewMyStatus.ViewMyStr();
                 }
 
                 else if (item.itemName == "최대체력증가물약")
                 {
-
                     Json.instance.data.maxhp += 100;
-
                     hpBar.maxValue = Json.instance.data.maxhp; //현재 maxhp 수치를 hp바의 maxvalue 값에 넣어주는것
-
                     AudioManager.instance.PlaySE(DrinkMaxHpPotion,1,1);
-
-                    SetSlotCount(-1); // 한개를 소모
+                    SetSlotCount(-1); 
                     viewMyStatus.ViewMyMaxhp();
                 }
 
                 else if (item.itemName == "전사의 돌")
                 {
-
-                    Json.instance.data.criticalStr += 0.1000000f;
-
+                    Json.instance.data.criticalStr += 0.1f;
                     AudioManager.instance.PlaySE(UseCriticalStone,1,1);
-
                     SetSlotCount(-1); // 한개를 소모
-
                     viewMyStatus.ViewMyCriticalStr();
                 }
 
                 else if (item.itemName == "스태미나회복물약")
                 {
                     player.HealingStamina(); // 플레이어의 스태미나회복 함수를 호출.
-
                     AudioManager.instance.PlaySE(DrinkHealingPotion,1,1);
                     SetSlotCount(-1); // 한개를 소모
-
                 }
 
             }
-
-
-
-            
-            
-
         }
     }
 
@@ -197,7 +158,6 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         {
             DragSlot.instance.dragSlot = this; //드래그슬롯 클래스안의 슬롯을 복사해서
             DragSlot.instance.DragSetImage(itemImage);  // 아이템 이미지를 넣어준다
-
             DragSlot.instance.transform.position = eventData.position; 
         }
         

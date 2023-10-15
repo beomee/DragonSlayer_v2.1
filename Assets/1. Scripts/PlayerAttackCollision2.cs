@@ -7,7 +7,9 @@ public class PlayerAttackCollision2 : MonoBehaviour
     //public GameObject criticalUi;  // 크리티컬 UI를 담을 게임오브젝트 변수
     public GameObject effect_MonsterHit_Critical;
     public GameObject effect_MonsterHit;
-    //public ParticleSystem ps;
+
+    const float secondAttack = 1.1f;
+
 
     public Collider coll;
     int randomInt;  // 크리티컬 확률을 저장하기 위한 변수 
@@ -39,11 +41,11 @@ public class PlayerAttackCollision2 : MonoBehaviour
         {
             coll.enabled = false;
 
-         
+
 
             if (randomInt > 1)
             {
-                other.GetComponent<Enemy_RedDragon>().Damaged(Json.instance.data.str);
+                other.GetComponent<Enemy_RedDragon>().Damaged(Json.instance.data.str * secondAttack);
                 Instantiate(effect_MonsterHit, transform.position, transform.rotation);
                 AudioManager.instance.PlaySE(monsterDamaged2, Random.Range(0.95f, 1.05f), Random.Range(0.85f, 1.0f)); // 첫번째 공격에 맞은 몬스터의 소리 
 
@@ -52,7 +54,7 @@ public class PlayerAttackCollision2 : MonoBehaviour
             else
             {
 
-                other.GetComponent<Enemy_RedDragon>().Damaged(Json.instance.data.str * Json.instance.data.criticalStr);
+                other.GetComponent<Enemy_RedDragon>().Damaged((Json.instance.data.str * secondAttack) * Json.instance.data.criticalStr);
                 Instantiate(effect_MonsterHit, transform.position, transform.rotation);
                 Instantiate(effect_MonsterHit_Critical, transform.position, transform.rotation);
                 AudioManager.instance.PlaySE(monsterDamaged2, Random.Range(0.95f, 1.05f), Random.Range(0.85f, 1.0f)); // 첫번째 공격에 맞은 몬스터의 소리 
@@ -71,7 +73,7 @@ public class PlayerAttackCollision2 : MonoBehaviour
 
             if (randomInt > 1)
             {
-                other.GetComponent<Enemy_BrownDragon>().Damaged(Json.instance.data.str);
+                other.GetComponent<Enemy_BrownDragon>().Damaged(Json.instance.data.str * secondAttack);
                 Instantiate(effect_MonsterHit, transform.position, transform.rotation);
                 AudioManager.instance.PlaySE(monsterDamaged2, Random.Range(0.95f, 1.05f), Random.Range(0.85f, 1.0f)); // 첫번째 공격에 맞은 몬스터의 소리 
 
@@ -79,7 +81,7 @@ public class PlayerAttackCollision2 : MonoBehaviour
 
             else
             {
-                other.GetComponent<Enemy_BrownDragon>().Damaged(Json.instance.data.str * Json.instance.data.criticalStr);
+                other.GetComponent<Enemy_BrownDragon>().Damaged((Json.instance.data.str * secondAttack) * Json.instance.data.criticalStr);
                 Instantiate(effect_MonsterHit, transform.position, transform.rotation);
                 Instantiate(effect_MonsterHit_Critical, transform.position, transform.rotation);
                 AudioManager.instance.PlaySE(monsterDamaged2, Random.Range(0.95f, 1.05f), Random.Range(0.85f, 1.0f)); // 첫번째 공격에 맞은 몬스터의 소리 
@@ -97,7 +99,7 @@ public class PlayerAttackCollision2 : MonoBehaviour
 
             if (randomInt > 1) // 일반공격 일때 
             {
-                other.GetComponent<Enemy_GrayDragon>().Damaged(Json.instance.data.str);
+                other.GetComponent<Enemy_GrayDragon>().Damaged(Json.instance.data.str * secondAttack);
                 Instantiate(effect_MonsterHit, transform.position, transform.rotation);
                 AudioManager.instance.PlaySE(monsterDamaged, Random.Range(0.95f, 1.05f), Random.Range(0.85f, 1.0f)); // 첫번째 공격에 맞은 몬스터의 소리 
 
@@ -105,7 +107,7 @@ public class PlayerAttackCollision2 : MonoBehaviour
 
             else // 크리티컬 공격일때 
             {
-                other.GetComponent<Enemy_GrayDragon>().Damaged(Json.instance.data.str * Json.instance.data.criticalStr);
+                other.GetComponent<Enemy_GrayDragon>().Damaged((Json.instance.data.str * secondAttack) * Json.instance.data.criticalStr);
                 Instantiate(effect_MonsterHit, transform.position, transform.rotation);
                 Instantiate(effect_MonsterHit_Critical, transform.position, transform.rotation);
                 AudioManager.instance.PlaySE(monsterDamaged, Random.Range(0.95f, 1.05f), Random.Range(0.85f, 1.0f)); // 첫번째 공격에 맞은 몬스터의 소리 
@@ -124,14 +126,14 @@ public class PlayerAttackCollision2 : MonoBehaviour
 
             if (randomInt > 1)
             {
-                other.GetComponent<Enemy_PurpleDragon>().Damaged(Json.instance.data.str);
+                other.GetComponent<Enemy_PurpleDragon>().Damaged(Json.instance.data.str * secondAttack);
                 Instantiate(effect_MonsterHit, transform.position, transform.rotation);
                 AudioManager.instance.PlaySE(monsterDamaged2, Random.Range(0.95f, 1.05f), Random.Range(0.85f, 1.0f)); // 첫번째 공격에 맞은 몬스터의 소리 
             }
 
             else
             {
-                other.GetComponent<Enemy_PurpleDragon>().Damaged(Json.instance.data.str * Json.instance.data.criticalStr);
+                other.GetComponent<Enemy_PurpleDragon>().Damaged((Json.instance.data.str * secondAttack) * Json.instance.data.criticalStr);
                 Instantiate(effect_MonsterHit, transform.position, transform.rotation);
                 Instantiate(effect_MonsterHit_Critical, transform.position, transform.rotation);
                 AudioManager.instance.PlaySE(monsterDamaged2, Random.Range(0.95f, 1.05f), Random.Range(0.85f, 1.0f)); // 첫번째 공격에 맞은 몬스터의 소리 

@@ -4,21 +4,17 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-
     public float gravityScale; // 중력 크기
     public float jumpPower;    // 점프하는 힘 
     public float rotSpeed;     // 회전 속도
-    public bool toggleCameraRotation;    // art를 누르고 마우스를 움직이면 주변을 볼 수 있는 조건을 담을 변수 
     public float smoothness = 1000f;
     public bool isBlock = false;
     public bool isJump = false;
 
     public float Speed = 10.0f;
-
     public float rotateSpeed = 10.0f;       // 회전 속도
 
     float h, v;
-
     float forwardSpeed = 10.0f;
     float jumpSpeed = 10.0f;
 
@@ -53,20 +49,16 @@ public class PlayerMove : MonoBehaviour
         cc.enabled = true;
         camera = Camera.main;
         player = GetComponent<Player>();
-
-    
     }
 
-    public void isAttackEnd()
+    public void isAttackEnd() // 공격이 끝났을 때를 체크하는 함수 
     {
-        //anim.SetBool("isAttacking", false);
         isAttacking = false;
     }
 
-    public void isAttackStart()
+    public void isAttackStart() // 공격이 시작할 때를 체크하는 함수 
 
     {
-        //anim.SetBool("isAttacking", true);
         isAttacking = true;
     }
 
@@ -77,79 +69,14 @@ public class PlayerMove : MonoBehaviour
         //  중력 적용
         _y -= gravityScale * Time.deltaTime;
 
+        PlayerBlock(); // 막기 기능
+        PlayerWalk();  // 걷기 기능
 
-        //// 땅위에 있지 않을때만 중력이 작용하도록 만듦.
-        //if (!cc.isGrounded /*&& !isMouseLeftPressed*/)
-        //{
-
-        //}
-
-
-
-
-        PlayerBlock();
-        PlayerWalk();
-
-        //if (!Inventory.inventoryActivated)
-        //{
-
-        if (isAttacking == false)
+        if (isAttacking == false) // 공격이 끝났을때만 강공격 및 점프 가능
          {
-
            PlayerAttack_Strong();
            PlayerJump();
-          
-           
         }
-
-
-        if (Input.GetMouseButton(0)) // 왼쪽 마우스를 누른 상태라면(공격 중이라면)
-        {
-            toggleCameraRotation = true;  // 둘러보기 활성화
-        }
-
-        else
-        {
-            toggleCameraRotation = false;  // 둘러보기 비활성화
-        }
-
-        bool isMouseLeftPressed = Input.GetMouseButton(0);
-
-        if (!isMouseLeftPressed || isAttacking == false)
-                { 
-                  
-                  
-                 
-                   
-        }
-
-
-               
-          
-
-        else
-        {
-                //toggleCameraRotation = false;  // 둘러보기 비활성화
-              
-              
-        }
-
-
-            
-        //}
-
-        //if (isAttacking == true)
-        //{
-        //    GetComponent<PlayerMove>().enabled = false;
-        //}
-
-        //if (isAttacking == false)
-        //{
-        //    GetComponent<PlayerMove>().enabled = true;
-        //}
-
-
-
 
     }
 
@@ -157,47 +84,41 @@ public class PlayerMove : MonoBehaviour
     private void LateUpdate()
     {
     
-            Vector3 playerRotate = Vector3.Scale(camera.transform.forward, new Vector3(1, 0, 1));
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotate), Time.deltaTime * smoothness);
+      Vector3 playerRotate = Vector3.Scale(camera.transform.forward, new Vector3(1, 0, 1));
+      transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotate), Time.deltaTime * smoothness);
 
     }
 
-    void isJumpTrue()
+    void isJumpTrue() // 점프 중 
     {
         isJump = true;
     }
 
-    void isJumpFalse()
+    void isJumpFalse() // 점프 끝
     {
         isJump = false;
     }
     void PlayerJump()
     {
        
-
-        if (cc.isGrounded == true)
+        if (cc.isGrounded == true) 
         {
-
             anim.SetBool("isJump", true);
 
             // 땅 위에 있을때만 + 점프키를 눌렀을 때 점프!
             if (Input.GetButtonDown("Jump"))
               {
-                
-               
-                
                 anim.SetTrigger("jump");
                 
                 AudioManager.instance.PlaySE(Player_Jump, 1, 1);
                 _y = jumpPower;
-                //Player.instance.UseStamina(20.0f);
+
               }
 
-              // 땅에 닿으면 점프 애니메이션 끝나게 하기
+              // 땅에 닿으면 점프 애니메이션 끝나도록
               else
               {
-              anim.SetBool("isJump", false);
-                    
+              anim.SetBool("isJump", false); 
               }
             
         }
@@ -205,17 +126,11 @@ public class PlayerMove : MonoBehaviour
         else
         {
             anim.SetBool("isJump", false);
-           
-          
         }
     }
 
      void PlayerWalk()
      {
-       
-
-       
-
         // 상하 키보드 받아오기 
         float v = Input.GetAxis("Vertical");
 
@@ -238,7 +153,7 @@ public class PlayerMove : MonoBehaviour
             // 캐릭터 무빙 (시프트키 누르면 달리기)
             if (Input.GetKey(KeyCode.LeftShift) && Player.instance.currentStamina > 1f)
             {
-               cc.Move(dir * runspeed * Time.deltaTime); // 캐릭터 컨트롤러의 함수를 이용해서 앞뒤좌우로 움직이는 코드   
+                cc.Move(dir * runspeed * Time.deltaTime); // 캐릭터 컨트롤러의 함수를 이용해서 앞뒤좌우로 움직이는 코드   
 
                 anim.SetBool("isRun", true); // 뛰는 애니메이션
 
@@ -250,6 +165,7 @@ public class PlayerMove : MonoBehaviour
             {
                 // 걷는 애니메이션
                 anim.SetBool("isRun", false);
+
                 // 캐릭터 컨트롤러의 함수를 이용해서 앞뒤좌우로 실제로 움직이는 코드 
                 cc.Move(dir * speed * Time.deltaTime);
             }
@@ -259,7 +175,7 @@ public class PlayerMove : MonoBehaviour
 
 
 
-    void PlayerBlock()
+    void PlayerBlock() // 막기
     {
         if (Player.instance.currentStamina > 15f)
         {
@@ -274,7 +190,7 @@ public class PlayerMove : MonoBehaviour
 
     }
 
-    void PlayerAttack_Strong()
+    void PlayerAttack_Strong() // 강 공격
     {
 
         if (Player.instance.currentStamina > 20f)
@@ -318,7 +234,7 @@ public class PlayerMove : MonoBehaviour
     
 }
 
-
+#region
 // 조건을 두개 같이 넣어놔야 자연스럽게 된다. (any state에서 전환되니까 트리거 추가) 
 // 왜? bool만 넣으면 공중에서는 계속해서 true 값이 반복돼서 animator에서 끊기게 보인다.
 // 속도 델타타임 꼭 정규화를 해준 다음에 해야함!!!
@@ -326,3 +242,4 @@ public class PlayerMove : MonoBehaviour
 // 정규화 (크기를 1로 고정해서 방향만 남게함) -> 반환 값이 없어서 바로 적용 가능. 
 // dir = dir.normalized; // 정규화 다른 방법 -> 변수로 처리하는 법 
 //anim.SetFloat("speed", dir.magnitude); // 크기만 남도록 하는것.(float 자료형)
+#endregion
