@@ -6,16 +6,16 @@ using UnityEngine.UI;
 
 
 
-public class ShopSlot : MonoBehaviour/*, IPointerEnterHandler, IPointerExitHandler*/
+public class ShopSlot : MonoBehaviour
 {
 
-    public Item itemSell; // 판매를 할 아이템
+    public Item itemSell; // 판매 할 아이템
     public Image slotImg;
     public int itemCount = 1; //아이템의 개수
     public int buyForNeedGold = 1; // 아이템구매에 필요한 총 골드의 개수 (아이템 개수 * 아이템의 가격)
     public Inventory theInventory; //인벤토리 가져오기
-    public Text itemCountTxt;   // 아이템 개수를 텍스트로 가져오기 (UI에 보여져야 하니까) 
-    public Text buyForNeedGoldTxt;  // 아이템 구매에 필요한 총 골드의 개수를 텍스트로 가져오기 (UI에 보여져야 하니까)
+    public Text itemCountTxt;   // 아이템 개수를 텍스트로 가져오기
+    public Text buyForNeedGoldTxt;  // 아이템 구매에 필요한 총 골드의 개수를 텍스트로 가져오기
     public GameObject itemBuyFailImg; // 아이템 구매에 실패했을때 뜨는 문구를 담을 변수
     SlotToolTip theSlotToolTip; // 슬롯툴팁을 호출하는 변수 선언
 
@@ -27,20 +27,9 @@ public class ShopSlot : MonoBehaviour/*, IPointerEnterHandler, IPointerExitHandl
     // Start is called before the first frame update
     void Start()
     {
-
-        slotImg.sprite = itemSell.itemImage; // 내가 가지고있는 슬롯 이미지에, 판매할 이미지를 넣기. 
-
+        slotImg.sprite = itemSell.itemImage; 
         storeImg = GetComponent<GameObject>();
-
         theSlotToolTip = FindObjectOfType<SlotToolTip>();
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-
     }
 
     // 아이템을 구매하는 함수
@@ -50,13 +39,11 @@ public class ShopSlot : MonoBehaviour/*, IPointerEnterHandler, IPointerExitHandl
         int goldCount = 0; // 골드의 개수를 담을 변수
         int goldSlotNum = -1; // 골드가 담겨있는 슬롯의 번호(모르니까 -1)로 선언)
 
-
-        for (int i = 0; i < theInventory.slots.Length; i++) // 인벤토리의 슬롯의 길이만큼 반복을 함.
+        for (int i = 0; i < theInventory.slots.Length; i++) 
         {
 
             if (theInventory.slots[i].item != null) //인벤토리 i번째 슬롯의 아이템이 null 값이 아니라면,
             {
-
                 // 이 슬롯에 있는 아이템의 이름이 골드인지 아닌지 판별하기
                 if (theInventory.slots[i].item.itemName == "골드")
                 {
@@ -82,7 +69,6 @@ public class ShopSlot : MonoBehaviour/*, IPointerEnterHandler, IPointerExitHandl
             theInventory.slots[goldSlotNum].itemCount = goldCount; //인벤토리의 슬롯에있는[골드가 담겨있는 슬롯의번호]의 아이템 개수 에 goldCount를 넣음.
 
         }
-
         else  // 돈이 부족할 때 나타내는 기능 
         {
             itemBuyFailImg.SetActive(true);

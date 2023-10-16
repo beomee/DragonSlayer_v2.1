@@ -6,14 +6,14 @@ using UnityEngine.UI;
 public class SlotToolTip : MonoBehaviour
 {
     [SerializeField]
-    GameObject go_Base;  // 필요할떄만 호출할 거다. 
+    GameObject go_Base;  // 필요할떄만 호출
 
-    [SerializeField]   // 밖에서 끌어서 담을 수 있는데, 외부에서 쓰지는 못함.
-    Text txt_ItemName; // 아이템 이름을 담는 텍스트 
+    [SerializeField]   
+    Text txt_ItemName; // 아이템 이름
     [SerializeField]
-    Text txt_ItemInfo; // 아이템 설명을 담는 텍스트 
+    Text txt_ItemInfo; // 아이템 설명
     [SerializeField]
-    Text txt_ItemHowtoUsed; // 아이템 사용법을 담는 텍스트 
+    Text txt_ItemHowtoUsed; // 아이템 사용법
 
     public void PointerEnter()
     {

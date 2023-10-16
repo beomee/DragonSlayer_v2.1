@@ -418,7 +418,7 @@ public class Player : MonoBehaviour
         StartRegenStamina(); // 스태미나 리젠 함수
 
        
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(2))  // 달리기나 마우스왼쪽이나 스페이스를 누를 경우에
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(2) || Input.GetMouseButtonDown(1))  // 달리기나 마우스왼쪽이나 스페이스를 누를 경우에
         {
             StopRegenStanima();  // 스태미나 리젠 중지
         }

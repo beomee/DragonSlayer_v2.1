@@ -8,8 +8,6 @@ public class Store_ : MonoBehaviour
     public GameManager gm;
     public GameObject storeUi;
     PlayerMove playermove;
-    //TestBackCamera3 camera3;  => 씨네머신으로 다시 쓰지 않을 때 사용 할 변수 
-    //public Cinemachine.CinemachineFreeLook camera3;
     public Cinemachine.CinemachineBrain camera3;
     public Cinemachine.CinemachineFreeLook freeLook;
     public GameObject InteractionUi;
@@ -27,12 +25,8 @@ public class Store_ : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //camera3 = GetComponent<Cinemachine.CinemachineFreeLook>();
-        
-        //camera3 = player.GetComponentInChildren<TestBackCamera3>();  => 씨네머신으로 다시 쓰지 않을 때 사용할 코드 
         playermove = player.GetComponent<PlayerMove>();
         anim = player.GetComponent<Animator>();
-
     }
 
     private void OnTriggerStay(Collider other)
@@ -42,7 +36,6 @@ public class Store_ : MonoBehaviour
             Player.instance.isConnect = true;
         }
     }
-
 
     // Update is called once per frame
     void Update()
@@ -58,7 +51,6 @@ public class Store_ : MonoBehaviour
         {
            InteractionUi.SetActive(false);
         }
-
     }
 
     private void TryOpenStore()  // 상점 ui 여는 함수 
@@ -69,8 +61,6 @@ public class Store_ : MonoBehaviour
           OpenStoreImg();
        }
 
-
-
     }
     private void OpenStoreImg() //상점 이미지 열기 
     {
@@ -79,8 +69,6 @@ public class Store_ : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
 
         AudioManager.instance.PlaySE(OpenStore,1,1);   // 상점 열리는 사운드 출력 
-
-
 
         InteractionUi.SetActive(false); // 안내문구 ui 사라짐
 
@@ -97,12 +85,6 @@ public class Store_ : MonoBehaviour
         inventoryUi.SetActive(true); // 인벤토리 ui 열기
         freeLook.m_XAxis.m_MaxSpeed = 0;
 
-
-        //anim.enabled = false; // 애니메이터 작동 중단 
-        //playermove.enabled = false; // 플레이어 기능 중단  
-
-        //camera3.enabled = false; // 카메라 기능 중단 
-
     }
 
     public void CloseStoreImg() // esc키를 누르거나 나가기 버튼을 눌렀을 때 호출 
@@ -114,15 +96,6 @@ public class Store_ : MonoBehaviour
 
         storeUi.SetActive(false);
         InteractionUi.SetActive(false);
-
-
-        //player.GetComponent<Player>().enabled = true;
-        //anim.enabled = true;
-        //playermove.enabled = true; // 플레이어 기능 중단  
-     
-       
-
-
     }
 }
 
