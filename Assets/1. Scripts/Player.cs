@@ -315,7 +315,7 @@ public class Player : MonoBehaviour
     }
 
 
-    public void Healing()  // 체력회복포션을 먹었을때 
+    public void Healing()  // 체력회복포션을 사용할 떄 호출
 
     {
         Json.instance.data.hp += Json.instance.data.maxhp * 0.3f; //hp를 전체 체력의 30프로 회복 
@@ -326,7 +326,7 @@ public class Player : MonoBehaviour
 
     }
 
-    public void HealingStamina() // 스태미나회복포션을 먹었을때
+    public void HealingStamina() // 스태미나회복포션을 먹었을때 호출
     {
         currentStamina += maxStamina * 0.3f; // 스태미나를 전체의 30프로 회복
         staminaBar.value = currentStamina; // 현재 스태미나 수치를 스태미나바에 적용
@@ -468,7 +468,7 @@ public class Player : MonoBehaviour
 
     public void StopRegenStanima() // 스태미나 리젠 중지
     {
-        if (regen != null) // 스태미나가 가득 찼다면
+        if (regen != null) // 리젠하는 코루틴함수가 작동하지 않을 경우
         {
             StopCoroutine(regen);
             regen = null;
@@ -480,16 +480,14 @@ public class Player : MonoBehaviour
 
        yield return new WaitForSeconds(2.0f); 
 
-        while (currentStamina < maxStamina)  // 현재 스태미나가 최대 스태미나 보다 작을 경우
+        while (currentStamina < maxStamina) 
         {
           currentStamina += 1.0f;   // 현재 스태미나를 1만큼 계속 반복해서 상승함.
-          staminaBar.value = currentStamina;    // 스태미나바의 value를 바꿔줌 
+          staminaBar.value = currentStamina;    // 스태미나바의 value 변경
           yield return new WaitForSeconds(0.1f); 
 
-      }
-        
-      regen = null;  // 리젠을 할때는 null 상태로 바뀜.
-       
+        }
+      regen = null;  
     }
 
      

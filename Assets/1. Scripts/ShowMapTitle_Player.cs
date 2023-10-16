@@ -16,11 +16,11 @@ public class ShowMapTitle_Player : MonoBehaviour
     bool isArea3 = false;
     bool isArea4 = false;
 
-    Enemy_RedDragon redDragon;
+    public Enemy_RedDragon redDragon;
 
     private void Start()
     {
-        redDragon = GetComponent<Enemy_RedDragon>();
+        
     }
 
     private void OnTriggerEnter(Collider other)
