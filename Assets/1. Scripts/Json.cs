@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 using System.IO;
 
 
-
-// 직렬화 
 [System.Serializable]
 public class Data  
 {
@@ -27,36 +25,25 @@ public class Json : MonoBehaviour
     public Button Savebtn;   // 저장해줄 버튼
     static public Json instance; 
     public Transform player;
-
     public GameObject saveCompleteImg;
-
     string GameDataFileName = "GameData.json";
     private void Awake()
     {
-        
-
         if (instance == null)
         {
-            instance = this; //인스턴스에 나를 할당 
+            instance = this; 
 
-            DontDestroyOnLoad(gameObject); // 다른씬으로 가도 사라지지 않도록.      
+            DontDestroyOnLoad(gameObject);   
         }
 
         else if (instance != this)
         {
             Destroy(gameObject);
         }
-
-       
     }
-
-    // Start is called before the first frame update
     private void Start()
     {
-       
-
         Savebtn.onClick.AddListener(Save); // 저장버튼 기능 시작 
-        //Load();
     }
 
     public void Save()
@@ -69,14 +56,13 @@ public class Json : MonoBehaviour
 
         // 저장 경로
         string path = Application.persistentDataPath + "/" + GameDataFileName;
-        // 저장할 클래스를 json 형태로 전환 (가독성 좋게)
+        // 저장할 클래스를 json 형태로 전환 
         string saveDate = JsonUtility.ToJson(data,true);
         // json 형태로 전환된 문자열을 저장
         File.WriteAllText(path, saveDate); //파일을 생성하면서 값을 동시에 저장
         print("저장 완료");
 
     }
-
 
     public void Load()
     {
@@ -95,8 +81,6 @@ public class Json : MonoBehaviour
             Player.instance.hpBar.maxValue = Json.instance.data.maxhp;
             Player.instance.hpBar.value = Json.instance.data.hp;
             print(" 저장된 파일 불러오기 완료");
-         
-
         }
 
         if (!File.Exists(path))
@@ -116,38 +100,23 @@ public class Json : MonoBehaviour
             // 데이터 삭제 완료
             File.Delete(path);
         }
-
         else
         {
             return;
         }
-
-        // 데이터 삭제 완료
     }
 
     public void FirstStart() // 초기 값으로 설정해주는 코드 
     {
         player.position = new Vector3(-235.5f, 0.118f, -236.8f);
+
         // 플레이어의 최초 스텟들 
         Json.instance.data.hp = 1000f;
         Json.instance.data.maxhp = 1000f;
         Json.instance.data.str = 70f;
         Json.instance.data.criticalStr = 3.00f;
         Json.instance.data.itemNumber.Clear(); // 아이템 초기화
-
-        //Json.instance.data.position = new Vector3(-235.5f, 0.118f, -236.8f);
-        //print(Json.instance.data.position);
-        //player.position = Json.instance.data.position; // 플레이어 위치 불러오기
-        
     }
 
 
-    // 게임이 꺼졌을때 자동으로 저장 되는 기능
-    // 게임 종료 시 호출
-    //private void OnApplicationQuit()
-    //{
-    //    Save(); 
-    //}
-
-    // 제이슨은 게임오브젝트를 저장 못함.
 }
