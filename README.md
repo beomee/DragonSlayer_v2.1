@@ -3,7 +3,7 @@
 
 귀한 시간내어 방문해주셔서 감사합니다🙏
 
-직접 플레이 해보시려면 [여기](https://github.com/beomee/DragonSlayer_v2.1/edit/main/README.md#oss-moayoung)를 클릭하시고, 영상을 보시려면 [여기](https://youtu.be/CXb5t8PhBtA)를 클릭하시면 시청하실 수 있습니다.
+직접 플레이 해보시려면 [여기](https://drive.google.com/file/d/1smWfNsNpbCK6CdtonWhsx04_Z-4trUZN/view?usp=sharing)를 클릭하시고, 영상을 보시려면 [여기](https://youtu.be/CXb5t8PhBtA)를 클릭하시면 시청하실 수 있습니다.
 
 ## 🎮 게임소개
 일반몬스터를 처치하고 얻어낸 재화로 캐릭터를 성장시키고, 
