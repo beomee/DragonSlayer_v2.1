@@ -42,7 +42,7 @@
 - 개발 의도
 - 몬스터 정보
 - 공격패턴
-#### 막기 - <a href="https://github.com/beomee/DragonSlayer_v2.1/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%A7%89%EA%B8%B0)" >상세보기 - WIKI 이동</a>
+#### 전투 - <a href="https://github.com/beomee/DragonSlayer_v2.1/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-(%EC%A0%84%ED%88%AC)" >상세보기 - WIKI 이동</a>
 - 개발 의도
 - 조작법
 - 특징
