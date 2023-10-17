@@ -44,7 +44,9 @@
 - 공격패턴
 #### 전투 - <a href="https://github.com/beomee/DragonSlayer_v2.1/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-(%EC%A0%84%ED%88%AC)" >상세보기 - WIKI 이동</a>
 - 개발 의도
-- 조작법
+- 공격(3단공격, 강 공격)
+- 막기
+- 피격효과(화상,슬로우,카메라쉐이크,블러드스크린)
 - 특징
 #### 스태미나 - <a href="https://github.com/beomee/DragonSlayer_v2.1/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EC%8A%A4%ED%83%9C%EB%AF%B8%EB%82%98)" >상세보기 - WIKI 이동</a>
 - 개발 의도
@@ -54,11 +56,6 @@
 - 아이템 목록 & 기능
 - 인벤토리 기능
 - 상점 기능
-#### 캐릭터 피격효과 - <a href="https://github.com/beomee/DragonSlayer_v2.1/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-(%ED%94%BC%EA%B2%A9%ED%9A%A8%EA%B3%BC)" >상세보기 - WIKI 이동</a>
-- 개발 의도
-- 상태이상 (화상 / 슬로우)
-- 카메라 쉐이크
-- 블러드 스크린
 #### 저장&불러오기 - <a href="https://github.com/beomee/DragonSlayer_v2.1/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%A7%89%EA%B8%B0)" >상세보기 - WIKI 이동</a>
 - 개발 의도
 - 조작법
