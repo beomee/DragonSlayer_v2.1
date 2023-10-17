@@ -49,14 +49,11 @@
 #### 스태미나 - <a href="https://github.com/beomee/DragonSlayer_v2.1/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EC%8A%A4%ED%83%9C%EB%AF%B8%EB%82%98)" >상세보기 - WIKI 이동</a>
 - 개발 의도
 - 특징
-#### 아이템 - <a href="https://github.com/beomee/DragonSlayer_v2.1/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%A7%89%EA%B8%B0)" >상세보기 - WIKI 이동</a>
+#### 아이템&인벤토리&상점 - <a href="https://github.com/beomee/DragonSlayer_v2.1/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-(%EC%95%84%EC%9D%B4%ED%85%9C&%EC%9D%B8%EB%B2%A4%ED%86%A0%EB%A6%AC&%EC%83%81%EC%A0%90)" >상세보기 - WIKI 이동</a>
 - 개발 의도
-- 조작법
-- 특징
-#### 상점&인벤토리 - <a href="https://github.com/beomee/DragonSlayer_v2.1/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%A7%89%EA%B8%B0)" >상세보기 - WIKI 이동</a>
-- 개발 의도
-- 조작법
-- 특징
+- 아이템 목록 및 기능
+- 인벤토리 기능
+- 상점 기능
 #### 저장&불러오기 - <a href="https://github.com/beomee/DragonSlayer_v2.1/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%A7%89%EA%B8%B0)" >상세보기 - WIKI 이동</a>
 - 개발 의도
 - 조작법
