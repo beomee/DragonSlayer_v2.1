@@ -54,11 +54,13 @@
 - 아이템 목록 & 기능
 - 인벤토리 기능
 - 상점 기능
+#### 캐릭터 피격효과 - <a href="https://github.com/beomee/DragonSlayer_v2.1/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-(%ED%94%BC%EA%B2%A9%ED%9A%A8%EA%B3%BC)" >상세보기 - WIKI 이동</a>
+- 개발 의도
+- 상태이상 (화상 / 슬로우)
+- 카메라 쉐이크
+- 블러드 스크린
 #### 저장&불러오기 - <a href="https://github.com/beomee/DragonSlayer_v2.1/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%A7%89%EA%B8%B0)" >상세보기 - WIKI 이동</a>
 - 개발 의도
 - 조작법
 - 특징
-#### 캐릭터 피격효과 - <a href="https://github.com/beomee/DragonSlayer_v2.1/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%A7%89%EA%B8%B0)" >상세보기 - WIKI 이동</a>
-- 개발 의도
-- 조작법
-- 특징
+
