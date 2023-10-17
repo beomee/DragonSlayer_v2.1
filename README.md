@@ -46,3 +46,23 @@
 - 개발 의도
 - 조작법
 - 특징
+#### 스태미나 - <a href="https://github.com/beomee/DragonSlayer_v2.1/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%A7%89%EA%B8%B0)" >상세보기 - WIKI 이동</a>
+- 개발 의도
+- 조작법
+- 특징
+#### 아이템 - <a href="https://github.com/beomee/DragonSlayer_v2.1/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%A7%89%EA%B8%B0)" >상세보기 - WIKI 이동</a>
+- 개발 의도
+- 조작법
+- 특징
+#### 상점&인벤토리 - <a href="https://github.com/beomee/DragonSlayer_v2.1/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%A7%89%EA%B8%B0)" >상세보기 - WIKI 이동</a>
+- 개발 의도
+- 조작법
+- 특징
+#### 저장&불러오기 - <a href="https://github.com/beomee/DragonSlayer_v2.1/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%A7%89%EA%B8%B0)" >상세보기 - WIKI 이동</a>
+- 개발 의도
+- 조작법
+- 특징
+#### 캐릭터 피격효과 - <a href="https://github.com/beomee/DragonSlayer_v2.1/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%A7%89%EA%B8%B0)" >상세보기 - WIKI 이동</a>
+- 개발 의도
+- 조작법
+- 특징
