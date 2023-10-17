@@ -5,7 +5,7 @@
 
 직접 플레이 해보시려면 🎮[여기](https://drive.google.com/file/d/1smWfNsNpbCK6CdtonWhsx04_Z-4trUZN/view?usp=sharing)를 클릭하시고, 영상을 보시려면 📺[여기](https://youtu.be/CXb5t8PhBtA)를 클릭하시면 시청하실 수 있습니다.
 
-아래 PPT 자료를 통해 상세 개발기간, 개발이슈, 개발 예정사항까지 확인하실 수 있으니 꼭! 한번 읽어주시기 바랍니다😊
+아래 PPT 자료를 통해 상세 개발기간, 개발이슈, 개발 예정사항을 확인하실 수 있습니다😊
 
 📖[PPT자료](https://drive.google.com/file/d/1WfVyrGDEWBe26U7yKOrHyebIo6szYe_s/view?usp=sharing)
 
