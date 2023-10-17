@@ -38,7 +38,7 @@
 
 
 ## 📌 주요기능
-#### 몬스터 - <a href="https://github.com/beomee/DragonSlayer_v2.1/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%AA%AC%EC%8A%A4%ED%84%B0)" >상세보기 - WIKI 이동</a>
+#### 몬스터 - <a href="https://github.com/beomee/DragonSlayer_v2.1/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-(%EB%AA%AC%EC%8A%A4%ED%84%B0)" >상세보기 - WIKI 이동</a>
 - 개발 의도
 - 몬스터 정보
 - 공격패턴
